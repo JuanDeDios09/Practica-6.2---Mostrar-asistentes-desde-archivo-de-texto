@@ -12,17 +12,23 @@ try {
     //Abrir el archivo para lectura 
     $fp = fopen($archivo, "r");
 
+    echo "<ol>";
+
     // Si no pudo abrir el archivo, lanzamos una excepcion
     $contador = 1;
     while (!feof($fp)) {
         // Leemos una linea del archivo
         $linea = fgets($fp);
 
-        //htmlspecialchars() para evitar problemas de seguridad con HTML
-        echo $contador . ".". htmlspecialchars(trim($linea)) . "<br>";
-        $contador++;
-        
+        if (trim($linea) != "") {
+
+            //htmlspecialchars() para evitar problemas de seguridad con HTML
+            echo "<li>" . htmlspecialchars(trim($linea)) . "</li>";
+            $contador++;
+        }
     }
+
+    echo "</ol>";
 
     fclose($fp);
 } catch (Exception $e) {
